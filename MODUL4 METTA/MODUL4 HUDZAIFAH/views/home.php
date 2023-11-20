@@ -5,15 +5,24 @@ session_start();
 require '../config/connect.php';
 
 if (!isset($_SESSION['login'])) {
-  header("Location: login.php");
+    header("Location: login.php");
 }
 
 // (1) Buat variabel untuk menampung id user berdasarkan session dengan key id
 //     Kemudian lakukan query untuk mencari id user menggunakan variabel yang sudah dibuat
-// (2) Buatlah perkondisian ketika id ditemukan ( gunakan mysqli_num_rows == 1 )
 
-    // a. Simpan hasil query menjadi array asosiatif menggunakan fungsi mysqli_fetch_assoc dalam variabel $data
-    // 
+$moonraker = $_SESSION['id'];
+$query = "SELECT * FROM users WHERE id = $moonraker";
+$نتائج = mysqli_query($connect, $query);
+
+
+// (2) Buatlah perkondisian ketika id ditemukan ( gunakan mysqli_num_rows == 1 )
+if (mysqli_num_rows($نتائج) == 1) {
+    $data = mysqli_fetch_assoc(($نتائج));
+}
+// a. Simpan hasil query menjadi array asosiatif menggunakan fungsi mysqli_fetch_assoc dalam variabel $data
+
+// 
 
 // 
 
@@ -62,12 +71,12 @@ if (!isset($_SESSION['login'])) {
     <div class="container d-flex min-vh-100 justify-content-center align-items-center">
         <div class="text-center">
 
-        <h1 class="mb-3">👋 Hello, <?= $data["name"] ?></h1>
-        <h1 class="mb-5">Selamat datang di Showroom Mobil!</h1>
+            <h1 class="mb-3">👋 Hello, <?= $data["name"] ?></h1>
+            <h1 class="mb-5">Selamat datang di Showroom Mobil!</h1>
 
-        <form action="../config/LogoutController.php" method="post">
-            <button type="submit" class="btn btn-danger" name="logout">Logout</button>
-        </form>
+            <form action="../config/LogoutController.php" method="post">
+                <button type="submit" class="btn btn-danger" name="logout">Logout</button>
+            </form>
 
         </div>
     </div>
