@@ -3,7 +3,7 @@
 
 // (1) Buatlah variable untuk connect ke database yang telah di import ke phpMyAdmin
 
-$db = mysqli_connect('localhost', 'root', '', 'modul4_wad'); 
+$db = mysqli_connect('localhost', 'root', '', 'modul4'); 
 
 // 
 
